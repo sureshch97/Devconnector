@@ -13,6 +13,31 @@ import {
     AUTH_ERROR
 } from './types'
 
+
+    //LOAD USER
+
+    export const loadUser=()=> async dispatch=>{
+
+        if(localStorage.token){
+            setAuthToken(localStorage.token)
+        }
+
+        try {
+            const res = await axios.get('/api/auth');
+           
+            dispatch({
+                type:USER_LOADED,
+                payload:res.data
+            })
+        } catch (error) {
+
+           dispatch({
+               type:AUTH_ERROR,
+           })
+            
+        }
+   };
+
 //USER REGISTRATION
 
 export const register=({name,email,password})=>async dispatch=>{
@@ -58,6 +83,7 @@ export const login =({email,password})=> async dispatch=>{
                type:LOGIN_SUCCESS,
                payload:res.data
            });
+           dispatch(loadUser());
            dispatch(setAlert('Login Success' , 'success'));
      } catch (error) {
 
@@ -81,26 +107,4 @@ export const login =({email,password})=> async dispatch=>{
 
     }
 
-    //LOAD USER
 
-    export const loaduser=()=> async dispatch=>{
-
-         if(localStorage.token){
-             setAuthToken(localStorage.token)
-         }
-
-         try {
-             const res = await axios.get('/api/auth');
-            
-             dispatch({
-                 type:USER_LOADED,
-                 payload:res.data
-             })
-         } catch (error) {
-
-            dispatch({
-                type:AUTH_ERROR,
-            })
-             
-         }
-    };

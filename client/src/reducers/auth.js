@@ -21,7 +21,7 @@ function authReducer(state=intialState , action){
        case USER_LOADED:
         return {
             ...state,
-            isAuthenticated: true,
+            isAuthenticated:true,
             loading: false,
             user: payload
           };

@@ -32,7 +32,7 @@ import PropTypes from 'prop-types'
     }
     return (
         <Fragment>
-          <div className="">
+          <div className="form">
           <h1 className="large text-primary">Sign Up</h1>
         <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
         <form className="form"  onSubmit={e=>onsubmit(e)}>
@@ -64,7 +64,7 @@ import PropTypes from 'prop-types'
             
              <div className="form-group">
               
-              <input type="text"
+              <input type="password"
               placeholder="password"
               name="password"
               className="form-control"
@@ -74,9 +74,9 @@ import PropTypes from 'prop-types'
 
              <div className="form-group">
              
-              <input type="text"
+              <input type="password"
               name="password2"
-              placeholder="Conform password"
+              placeholder="Confirm password"
               className="form-control"
               required
               onChange={(e)=>onchange(e)}/> 
@@ -84,7 +84,7 @@ import PropTypes from 'prop-types'
 
               <button type="submit" className="btn btn-primary">Register</button>
 
-              <p className="my-1">Are you have an account?<a href="/login"> Sign In</a></p>  
+              <p className="my-1">Are you have an account?<a href="/login"> Login</a></p>  
          </form>   
           </div>
         

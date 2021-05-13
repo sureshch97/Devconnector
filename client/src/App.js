@@ -3,7 +3,6 @@ import './App.css';
 import {BrowserRouter as Router , Route ,Switch } from 'react-router-dom'
 import Navbar from './components/layout/navbar'
 import Landing from './components/layout/landing'
-import Devlopers from './components/layout/devlopers'
 import Dashboard from './components/Dashboard/dashboard'
 import Login from './components/auth/Login'
 import Register from './components/auth/Register'
@@ -11,7 +10,8 @@ import { Fragment, useEffect } from 'react';
 import {Provider} from 'react-redux'
 import store from './store'
 import Alert from './components/layout/alert';
-import {loaduser} from './actions/auth';
+import {loadUser} from './actions/auth';
+import {logout} from './actions/auth'
 import {setAuthToken} from './utils/setauthToken'
 import Private from './components/routing/privateroute'
 import createprofile from'./components/profile-forms/createprofileform'
@@ -29,11 +29,18 @@ if(localStorage.token){
   setAuthToken(localStorage.token)
 }
 const App = () => {
-  useEffect(()=>{
-    
-      store.dispatch(loaduser());
-  
-  })
+  useEffect(() => {
+    // check for token in LS
+    if (localStorage.token) {
+      setAuthToken(localStorage.token);
+    }
+    store.dispatch(loadUser());
+
+    // log user out from all tabs if they log out in one tab
+    window.addEventListener('storage', () => {
+      if (!localStorage.token) store.dispatch({ type: logout });
+    });
+  }, []);
   return (
     <Provider store={store}>
       <Router>
@@ -47,7 +54,7 @@ const App = () => {
           <Route exact path='/' component={Landing}/>
            <Route exact path='/login' component={Login}/> 
            <Route exact path='/register' component={Register}/>
-           <Route exact path='/devlopers' component={Devlopers}/>
+         
            < Route exact path='/profiles' component={Profiles}/>
            < Route exact path='/profile/:id' component={Profile}/>
            < Route exact path='/posts' component={Posts}/>

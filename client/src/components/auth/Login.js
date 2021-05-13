@@ -28,13 +28,15 @@ import PropTypes from 'prop-types'
         
     return (
         <Fragment>
-           <h1 className="large text-primary">Sig-in</h1>
+            <div className="form">
+            <h1 className="large text-primary">Sign In</h1>
            <p className="lead"><i className="fas fa-user"></i> Sign into your Account</p>
            <form className="form" onSubmit={e=>onsubmit(e)}>
                <div className="form-group">
                  
-                 <input type="text"
-                 placeholder="email Address"
+                 <input type="email"
+                 placeholder="Email Address"
+                
                  required
                  onChange={e=>onchange(e)}
                  name="email"></input>
@@ -42,17 +44,19 @@ import PropTypes from 'prop-types'
                <div className="form-group">
                  
                  <input 
-                 type="text"
-                 placeholder="password"
+                 type="password"
+                 placeholder="Password"
                  required
                  onChange={e=>onchange(e)}
                  name="password"
 
                  ></input>
                </div>
-               <input type="submit" className="btn btn-primary"/>
-               <p className="my-1">Dont have an account?<a href="/register"> Sign Up</a></p> 
+               <button type="submit" className="btn btn-primary">Login</button>
+               <p className="my-1">Dont have an account? <a href="/register">Create your account </a></p> 
             </form>  
+            </div>
+          
         </Fragment>
     )
 };
